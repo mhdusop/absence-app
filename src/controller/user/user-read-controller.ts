@@ -8,6 +8,7 @@ export const getAllUsers = async (req: Request, res: Response): Promise<void> =>
       const users = await userService.getAllUsers();
       res.json(users);
    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error get all user:', error);
+      throw error;
    }
 }
