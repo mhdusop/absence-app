@@ -1,13 +1,17 @@
 import express from 'express';
-import { qrRouter } from './routes/qr-routes';
+import bodyParser from 'body-parser';
+import cors from "cors";
 import { userRouter } from './routes/user/user-routes';
 
 const app = express();
-const PORT = process.env.APP_PORT || 3000;
+
+app.use(bodyParser.json());
+app.use(cors());
 
 // Router
 app.use('/api', userRouter);
-app.use('/api/qr', qrRouter);
+
+const PORT = process.env.APP_PORT || 3000;
 
 app.listen(PORT, () => {
    console.log(`Server is running at http://localhost:${PORT}`);
