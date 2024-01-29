@@ -17,11 +17,13 @@ model Jwt {
 
 model User {
    uuid       String   @id @default(uuid())
+   nim        String   @unique
    username   String
    email      String   @unique
    password   String
    phone      String
    address    String
+   qr_code    String?  @db.VarChar(1500)
    created_at DateTime @default(now())
    jwt        Jwt[]
 }
@@ -34,5 +36,6 @@ model Mahasiswa {
    password   String
    phone      String
    address    String
+   qr_code    String?  @db.VarChar(1500)
    created_at DateTime @default(now())
 }
