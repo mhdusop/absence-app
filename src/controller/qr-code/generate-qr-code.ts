@@ -4,7 +4,7 @@ import QRCode from 'qrcode';
 export const generateQRCode = async (nim: string): Promise<string> => {
    try {
       // Generate QR code with the nim data
-      const qrCodeDataURL = await QRCode.toDataURL(JSON.stringify({ nim }));
+      const qrCodeDataURL = await QRCode.toDataURL(nim);
       return qrCodeDataURL;
    } catch (error) {
       throw new Error('Error generating QR code');

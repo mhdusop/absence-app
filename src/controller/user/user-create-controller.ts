@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { generateQRCode } from '../qr-code/generate-qr-code';
 import { userService } from '../../services/user/user-service';
-import { log } from 'console';
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
    const { email, password, username, nim, address, phone } = req.body;
@@ -23,12 +22,8 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
       // Generate QR code from nim
       const qrCodeURL = await generateQRCode(nim);
       const base64Data = qrCodeURL.replace(/^data:image\/png;base64,/, '');
-      console.log(base64Data);
-
 
       const newUser = await userService.createUser({ email, password, username, nim, address, phone, qr_code: base64Data });
-
-      // Generate QR code from nim
 
       res.status(201).json({
          status: 201,
